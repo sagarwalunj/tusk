@@ -14,7 +14,7 @@ public List<Alien> getAlien()
 	List<Alien> aliens=new ArrayList<Alien>();
 	Alien a1=new Alien();
 	a1.setI(1);
-a1.setName("dhanu");
+a1.setName("Dh");
 Alien a3=new Alien();
 a3.setI(12);
 a3.setName("sagar");
