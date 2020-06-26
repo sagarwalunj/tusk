@@ -51,37 +51,44 @@ public List<TenantDto> getTenantFromFile() throws IOException{
 	 
  //Map<String,TenantDto> mTnt = new  HashMap<String, TenantDto>();	 
 	 
-	 final String FILE_NAME1 = "F://testFile/data12.xlsx";
+	 final String FILE_NAME1 = "F://testFile/data1233.xlsx";
 		FileOutputStream opf=new FileOutputStream(new File(FILE_NAME1));
 		XSSFWorkbook wrkBK= new XSSFWorkbook();
-		//XSSFSheet wrkSheet=wrkBK.createSheet();
-		XSSFSheet wrkSheet=worksheet;
+		XSSFSheet wrkSheet=wrkBK.createSheet();
+		//XSSFSheet wrkSheet=worksheet;
 		
 		
    List<TenantDto> listTnt=new ArrayList<>();
    TenantDto tennt=new TenantDto();
-   tennt.setName("D");
+   tennt.setName("Detective");
    tennt.setAge(22);
    tennt.setRent(5000);
-   tennt.setAdress("pune");
+   tennt.setAdress("dilhii");
    tennt.setRoom_no(105);
   
    TenantDto tennt1=new TenantDto();
-   tennt1.setName("s");
+   tennt1.setName("abuus");
    tennt1.setAge(45);
    tennt1.setRent(5000);
-   tennt1.setAdress("nashik");
+   tennt1.setAdress("germany");
    tennt1.setRoom_no(105);
    
    listTnt.add(tennt);
    listTnt.add(tennt1);
 
    int rowNum =wrkSheet.getLastRowNum();
-   rowNum++;
- 		for (TenantDto toj :listTnt) 
+   
+   Row rw =wrkSheet.createRow(rowNum++);
+   rw.createCell(0).setCellValue("Name");
+	rw.createCell(1).setCellValue("Address");
+	rw.createCell(2).setCellValue("AGE");
+	rw.createCell(3).setCellValue("Room Number");
+	rw.createCell(4).setCellValue("Rent");
+   
+   for (TenantDto toj :listTnt) 
  		{
  			 
- 		 Row rw =wrkSheet.createRow(rowNum++);
+	    rw =wrkSheet.createRow(rowNum++);
 	     int cellNumber=0;
 		rw.createCell(cellNumber++).setCellValue(toj.getName());
 		rw.createCell(cellNumber++).setCellValue(toj.getAdress());
@@ -90,15 +97,26 @@ public List<TenantDto> getTenantFromFile() throws IOException{
 		rw.createCell(cellNumber++).setCellValue(toj.getRent());
 			
  		}
+   
+   for (TenantDto toj :tenatdtolist) {
+	   rw =wrkSheet.createRow(rowNum++);
+	     int cellNumber=0;
+		rw.createCell(cellNumber++).setCellValue(toj.getName());
+		rw.createCell(cellNumber++).setCellValue(toj.getAdress());
+		rw.createCell(cellNumber++).setCellValue(toj.getAge());
+		rw.createCell(cellNumber++).setCellValue(toj.getRoom_no());
+		rw.createCell(cellNumber++).setCellValue(toj.getRent());
+   }
    // write filer
  		
  		wrkBK.write(opf);
  		System.out.println("Writing on Excel file Finished ...");
-
+ 		wrkBK.close();
  		opf.close();
+ 		
  		workbook.close();
  		excelFile.close();
-   
+ 		tenatdtolist.addAll(listTnt);
 	return tenatdtolist;
 }
 
